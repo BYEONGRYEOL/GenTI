@@ -45,7 +45,7 @@ public class ResponseExampleService {
 			.orElseThrow(() -> new ExpectedException(ErrorCode.UserNotFound));
 
 		responseExampleRepository.saveAll(
-			requestDtoList.stream().map(dto -> new ResponseExample(dto, findAdmin)).toList());
+			requestDtoList.stream().map(ResponseExample::new).toList());
 	}
 
 	@Transactional
@@ -53,6 +53,6 @@ public class ResponseExampleService {
 		User findAdmin = userRepository.findById(userId)
 			.orElseThrow(() -> new ExpectedException(ErrorCode.UserNotFound));
 		responseExampleRepository.saveAll(
-			requestDtoList.stream().map(dto -> new ResponseExample(dto, findAdmin)).toList());
+			requestDtoList.stream().map(ResponseExample::new).toList());
 	}
 }

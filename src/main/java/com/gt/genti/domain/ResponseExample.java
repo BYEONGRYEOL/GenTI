@@ -1,7 +1,7 @@
 package com.gt.genti.domain;
 
-import com.gt.genti.domain.common.Picture;
-import com.gt.genti.domain.common.PictureEntity;
+import com.gt.genti.domain.common.BaseTimeEntity;
+import com.gt.genti.dto.CommonPictureUrlResponseDto;
 import com.gt.genti.dto.ExampleSaveRequestDto;
 import com.gt.genti.dto.PromptOnlyExampleSaveRequestDto;
 
@@ -19,7 +19,7 @@ import lombok.NoArgsConstructor;
 @Entity
 @Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
-public class ResponseExample extends PictureEntity implements Picture {
+public class ResponseExample extends BaseTimeEntity {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	Long id;
@@ -30,18 +30,23 @@ public class ResponseExample extends PictureEntity implements Picture {
 	@Column(name = "prompt_only")
 	Boolean promptOnly;
 
-	public ResponseExample(ExampleSaveRequestDto dto, User uploadedBy) {
+	@Column(name = "`key`")
+	String key;
+
+	public ResponseExample(ExampleSaveRequestDto dto) {
 		this.promptOnly = false;
 		this.key = dto.getKey();
 		this.examplePrompt = dto.getPrompt();
-		this.setUploadedBy(uploadedBy);
 	}
 
-	public ResponseExample(PromptOnlyExampleSaveRequestDto dto, User uploadedBy) {
+	public ResponseExample(PromptOnlyExampleSaveRequestDto dto) {
 		this.promptOnly = true;
 		this.key = null;
 		this.examplePrompt = dto.getPrompt();
-		this.setUploadedBy(uploadedBy);
+	}
+
+	public CommonPictureUrlResponseDto mapToCommonResponse() {
+		return new CommonPictureUrlResponseDto(id, key);
 	}
 
 }

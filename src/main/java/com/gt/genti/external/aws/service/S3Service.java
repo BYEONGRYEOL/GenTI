@@ -76,6 +76,6 @@ public class S3Service {
 
 	private String createPath(String prefix, String fileName) {
 		String fileId = createFileId();
-		return String.format("%s/%s", prefix, fileId + "-" + fileName);
+		return String.format("%s/%s", prefix, fileName + "-" + fileId);
 	}
 }

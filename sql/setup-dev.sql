@@ -11,6 +11,7 @@ set @deactivatedCreatorId := 8; # 비활성화된 공급자의 CreatorId
 
 set @creatorId := 1; # 공급자의 CreatorId
 set @adminCreatorId := 3; # 어드민의 공급자 id
+
 insert ignore into user (id, created_at, modified_at, deleted_at, email, email_verified, introduction,
                          last_login_social_platform, login_id, nickname, password, user_role, roles, user_status,
                          username, sex)
@@ -37,13 +38,13 @@ values (1, localtime, localtime, '서병렬', '123-4142-2523331-123', '국민은
        (2, localtime, localtime, null, null, null, false, 5),
        (3, localtime, localtime, null, null, null, true, 1);
 
-insert ignore into picture_pose (id, created_at, modified_at, key, uploaded_by)
+insert ignore into picture_pose (id, created_at, modified_at, `key`, uploaded_by)
 values (1, LOCALTIME, LOCALTIME, 'pose_picture_url1', 2),
        (2, LOCALTIME, LOCALTIME, 'pose_picture_url2', 2),
        (3, LOCALTIME, LOCALTIME, 'pose_picture_url3', 2),
        (4, LOCALTIME, LOCALTIME, 'pose_picture_url4', 2);
 
-insert ignore into picture_user_face (id, created_at, modified_at, url, uploaded_by)
+insert ignore into picture_user_face (id, created_at, modified_at, `key`, uploaded_by)
 values (1, LOCALTIME, LOCALTIME, 'user_face_picture_url1', 2),
        (2, LOCALTIME, LOCALTIME, 'user_face_picture_url2', 2),
        (3, LOCALTIME, LOCALTIME, 'user_face_picture_url3', 2),
@@ -107,7 +108,6 @@ values (1, 1),
        (9, 8),
        (9, 9);
 
-
 insert ignore into picture_generate_response (id, created_at, modified_at, memo, status, creator_id, request_id,
                                               submitted_by_admin_at, submitted_by_creator_at)
 values (1, '2024-05-29 07:00:02', null, null, 'BEFORE_WORK', 1, 3, null, null),
@@ -125,20 +125,20 @@ insert ignore into report (id, created_at, modified_at, content, report_status, 
 values (1, '2024-05-29 10:30:00', null, '변태자식이 본인 발가락 사진을 보낸 것 같습니다.', 'NOT_RESOLVED', 4),
        (2, '2024-05-29 12:00:00', null, '모르는 사람 얼굴이에요', 'RESOLVED', 6);
 
-insert ignore into picture_created_by_creator (id, created_at, modified_at, url, picture_generate_response_id,
+insert ignore into picture_created_by_creator (id, created_at, modified_at, `key`, picture_generate_response_id,
                                                uploaded_by)
 values (1, localtime, localtime, '얼굴 완성 전 url 1', 2, 4),
        (2, localtime, localtime, '얼굴 완성 전 url 2', 3, 4),
        (3, localtime, localtime, '얼굴 완성 전 url 3', 4, 4);
 
-insert ignore into picture_completed (id, created_at, modified_at, url, uploaded_by, picture_generate_response_id,
+insert ignore into picture_completed (id, created_at, modified_at, `key`, uploaded_by, picture_generate_response_id,
                                       requester_id)
 values (1, localtime, localtime, '얼굴 완성 사진 url 1', 1, 3, 2),
        (2, localtime, localtime, '얼굴 완성 사진 url 2', 1, 4, 2),
        (3, localtime, localtime, '얼굴 완성 사진 url 3', 1, 5, 2),
        (4, localtime, localtime, '얼굴 완성 사진 url 4', 1, 6, 2);
 
-insert ignore into response_example (id, created_at, modified_at, example_picture_url, example_prompt, prompt_only,
+insert ignore into response_example (id, created_at, modified_at, `key`, example_prompt, prompt_only,
                                      uploaded_by)
 values (1, localtime, localtime, '/EXAMPLE/벚꽃벤치여자.png', '벚꽃 벤치 여자', false, 1),
        (2, localtime, localtime, '/EXAMPLE/한강잠수부.png', '한강잠수부', false, 1),
